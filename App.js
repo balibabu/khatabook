@@ -8,13 +8,13 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 export default function App() {
     return (
         <AuthProvider>
-            <DataProvider>
-                <AppLockProvider>
+            <AppLockProvider>
+                <DataProvider>
                     <GestureHandlerRootView>
                         <AppNavigator />
                     </GestureHandlerRootView>
-                </AppLockProvider>
-            </DataProvider>
+                </DataProvider>
+            </AppLockProvider>
         </AuthProvider>
     );
 }

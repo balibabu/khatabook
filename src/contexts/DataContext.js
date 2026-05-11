@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import { getFirestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, query, orderBy } from '@react-native-firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { Alert } from 'react-native';
+import WorkspaceScreen from '../screens/home/WorkspaceScreen';
 
 const DataContext = createContext();
 const db = getFirestore();
@@ -10,6 +11,7 @@ export const DataProvider = ({ children }) => {
     const { user } = useAuth();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [activeWorkspace, setActiveWorkspace] = useState(null);
 
     useEffect(() => {
         if (!user) {
@@ -36,7 +38,7 @@ export const DataProvider = ({ children }) => {
                 Alert.alert(
                     'Approval Pending',
                     'Your account is still pending verification. You will be able to access transactions once an admin approves your account.'
-                  );
+                );
             }, 3000);
             setLoading(false);
         });
@@ -59,9 +61,12 @@ export const DataProvider = ({ children }) => {
         await deleteDoc(docRef);
     }
 
+    const workspaces = ['Home', 'Work', 'School'];
+    const createWorkspace = () => { };
+
     return (
         <DataContext.Provider value={{ data, loading, save, remove }}>
-            {children}
+            {activeWorkspace ? children : <WorkspaceScreen {...{workspaces, setActiveWorkspace, createWorkspace}}/>}
         </DataContext.Provider>
     );
 }
