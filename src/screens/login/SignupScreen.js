@@ -32,7 +32,7 @@ export default function SignupScreen({ signup, setIsLoginPage }) {
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.welcomeText}>Create Account</Text>
-                    <Text style={styles.subText}>Sign up to start your khatabook</Text>
+                    <Text style={styles.subText}>Sign up to start your HisabKitab</Text>
                 </View>
 
                 <View style={styles.formContainer}>

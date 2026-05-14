@@ -23,7 +23,7 @@ export default function WorkspaceScreen({ workspaces, setActiveWorkspace, create
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.welcomeText}>Select Workspace</Text>
-                    <Text style={styles.subText}>Choose a khatabook to manage</Text>
+                    <Text style={styles.subText}>Choose a HisabKitab to manage</Text>
                 </View>
 
                 <View style={styles.formContainer}>

@@ -24,7 +24,7 @@ export default function Home() {
         <SafeAreaView style={styles.container}>
             <FocusAwareStatusBar barStyle="light-content" backgroundColor="#4A90E2" />
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>khatabook</Text>
+                <Text style={styles.headerTitle}>Hisab Kitab</Text>
                 <SegmentedControl options={filterOps} activeOption={filter} onChange={setFilter} />
             </View>
 

@@ -22,7 +22,7 @@ export default function LoginScreen({ login, setIsLoginPage }) {
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.welcomeText}>Welcome Back</Text>
-                    <Text style={styles.subText}>Sign in to manage your khatabook</Text>
+                    <Text style={styles.subText}>Sign in to manage your HisabKitab</Text>
                 </View>
 
                 <View style={styles.formContainer}>

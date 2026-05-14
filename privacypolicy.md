@@ -8,8 +8,8 @@ We use Your Personal data to provide and improve the Service. By using the Servi
 
 ## 1. Definitions
 *   **Account:** A unique account created for You to access our Service.
-*   **Application:** Refers to **Khatabook**, the software program provided by the Company.
-*   **Company:** (referred to as "the Company", "We", "Us" or "Our") refers to **Khatabook**, Nepal.
+*   **Application:** Refers to **HisabKitab**, the software program provided by the Company.
+*   **Company:** (referred to as "the Company", "We", "Us" or "Our") refers to **HisabKitab**, Nepal.
 *   **Service:** Refers to the Application.
 *   **Service Provider:** Refers to third-party companies (specifically **Google Firebase**) employed by the Company to facilitate the Service.
 
