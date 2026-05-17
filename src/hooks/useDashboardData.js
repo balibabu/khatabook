@@ -24,10 +24,29 @@ export const useDashboardData = (data, filter) => {
         let income = 0, expense = 0;
         filteredDocs.forEach(i => i.category === 0 ? income += Number(i.amount) : expense += Number(i.amount));
 
+        const grouped = {};
+
+        filteredDocs.forEach(item => {
+            const d = new Date(item.date);
+            const dayKey = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+            const groupKey = `${dayKey}_${item.category}`;
+            if (!grouped[groupKey]) {
+                grouped[groupKey] = {
+                    id: groupKey,
+                    category: item.category,
+                    description: item.category === 0 ? 'Daily Income' : 'Daily Expense',
+                    amount: 0,
+                    date: new Date(d.getFullYear(), d.getMonth(), d.getDate()).toISOString()
+                };
+            }
+            grouped[groupKey].amount += Number(item.amount) || 0;
+        });
+        const graphData = Object.values(grouped).sort((a, b) => new Date(a.date) - new Date(b.date));
         return {
             income, expense,
             balance: income - expense,
-            filtered: filteredDocs.sort((a, b) => new Date(b.date) - new Date(a.date))
+            filtered: filteredDocs.sort((a, b) => new Date(b.date) - new Date(a.date)),
+            graphData
         };
     }, [data, filter]);
 };

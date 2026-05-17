@@ -9,7 +9,7 @@ import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 import FloatingButton from '../../components/FloatingButton';
 import TransactionItem from '../home/TransactionItem';
 import { useTransactionFilters } from '../../hooks/useTransactionFilters';
-import SwipeToDelete from '../../components/SwipeToDelete';
+import SwipeActions from '../../components/SwipeActions';
 
 export default function DetailsScreen({ navigation }) {
     const { data, remove } = useData();
@@ -29,36 +29,64 @@ export default function DetailsScreen({ navigation }) {
 
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>Transactions</Text>
-                <TouchableOpacity
-                    style={[styles.filterToggle, showFilters && styles.filterToggleActive]}
-                    onPress={() => { if (showFilters) resetFilters(); setShowFilters(!showFilters); }}
-                >
-                    <Icon name={showFilters ? "close" : "options-outline"} size={22} color={showFilters ? "#fff" : "#4F46E5"} />
+                <TouchableOpacity style={styles.filterToggle} onPress={() => { if (showFilters) resetFilters(); setShowFilters(!showFilters); }}>
+                    <Icon name={showFilters ? "chevron-collapse" : "options-outline"} size={22} color="#2873c9" />
                 </TouchableOpacity>
             </View>
 
             <View style={styles.searchSection}>
-                <View style={styles.searchBar}>
+                <View style={[styles.searchBar, showFilters && styles.searchBarActive]}>
                     <Icon name="search-outline" size={18} color="#94A3B8" />
                     <TextInput style={styles.searchInput} placeholder="Search..." value={searchQuery} onChangeText={setSearchQuery} placeholderTextColor="#9CA3AF" />
                 </View>
-            </View>
 
-            {showFilters && (
-                <View style={styles.filterContainer}>
-                    <DateFilter label="From" date={fromDate} onPress={() => setPicker({ show: true, mode: 'from' })} />
-                    <DateFilter label="To" date={toDate} onPress={() => setPicker({ show: true, mode: 'to' })} />
-                </View>
-            )}
+                {showFilters && (
+                    <View style={styles.filterCard}>
+                        <View style={styles.dateRow}>
+                            <DateFilter label="From Date" date={fromDate} onPress={() => setPicker({ show: true, mode: 'from' })} />
+                            <View style={styles.dateDivider}>
+                                <Icon name="arrow-forward-outline" size={16} color="#CBD5E1" />
+                            </View>
+                            <DateFilter label="To Date" date={toDate} onPress={() => setPicker({ show: true, mode: 'to' })} />
+                        </View>
+                        
+                        <View style={styles.summaryRow}>
+                            <View style={[styles.summaryBox, styles.incomeBox]}>
+                                <View style={[styles.iconWrapper, { backgroundColor: '#D1FAE5' }]}>
+                                    <Icon name="arrow-down" size={14} color="#0D9488" />
+                                </View>
+                                <View>
+                                    <Text style={styles.summaryLabel}>Income</Text>
+                                    <Text style={[styles.summaryValue, { color: '#0D9488' }]}>
+                                        Rs {filteredData.filter(t => t.category === 0).reduce((sum, t) => sum + (Number(t.amount) || 0), 0)}
+                                    </Text>
+                                </View>
+                            </View>
+
+                            <View style={[styles.summaryBox, styles.expenseBox]}>
+                                <View style={[styles.iconWrapper, { backgroundColor: '#FFE4E6' }]}>
+                                    <Icon name="arrow-up" size={14} color="#E11D48" />
+                                </View>
+                                <View>
+                                    <Text style={styles.summaryLabel}>Expense</Text>
+                                    <Text style={[styles.summaryValue, { color: '#E11D48' }]}>
+                                        Rs {filteredData.filter(t => t.category === 1).reduce((sum, t) => sum + (Number(t.amount) || 0), 0)}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                )}
+            </View>
 
             <FlatList
                 data={filteredData}
                 keyExtractor={item => item.id}
                 contentContainerStyle={styles.listContent}
                 renderItem={({ item }) => (
-                    <SwipeToDelete onDelete={() => handleDelete(item.id)} onEdit={() => navigation.navigate('Form', { id: item.id })}>
+                    <SwipeActions onDelete={() => handleDelete(item.id)} onEdit={() => navigation.navigate('Form', { id: item.id })}>
                         <TransactionItem item={item} />
-                    </SwipeToDelete>
+                    </SwipeActions>
                 )}
                 ListEmptyComponent={<EmptyState />}
             />
@@ -77,14 +105,13 @@ export default function DetailsScreen({ navigation }) {
         </SafeAreaView>
     );
 }
-//                 renderItem={({ item }) => <TransactionItem item={item} onEdit={() => navigation.navigate('Form', { id: item.id })} onDelete={() => handleDelete(item.id)} />}
 
 const DateFilter = ({ label, date, onPress }) => (
     <View style={styles.filterGroup}>
         <Text style={styles.filterLabel}>{label}</Text>
         <TouchableOpacity style={styles.dateInput} onPress={onPress}>
-            <Text style={styles.dateText}>{date ? date.toLocaleDateString() : 'Select'}</Text>
-            <Icon name="calendar-outline" size={14} color="#4F46E5" />
+            <Text style={styles.dateText}>{date ? date.toLocaleDateString() : 'Select Date'}</Text>
+            <Icon name="calendar-outline" size={16} color="#64748B" />
         </TouchableOpacity>
     </View>
 );
@@ -101,16 +128,33 @@ export const styles = StyleSheet.create({
     header: { flexDirection: 'row', justifyContent: 'space-between', padding: 20, alignItems: 'center' },
     headerTitle: { fontSize: 28, fontFamily: fonts.bold, color: '#1E293B' },
     filterToggle: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#F1F5F9', justifyContent: 'center', alignItems: 'center' },
-    filterToggleActive: { backgroundColor: '#4F46E5' },
-    searchSection: { paddingHorizontal: 20, marginBottom: 10 },
+    filterToggleActive: { backgroundColor1: '#4A90E2' },
+    
+    // Updated Search Section styles for the depth/dropdown effect
+    searchSection: { paddingHorizontal: 20, marginBottom: 10, zIndex: 10 },
     searchBar: { flexDirection: 'row', alignItems: 'center', height: 52, borderRadius: 15, paddingHorizontal: 15, backgroundColor: '#F8FAFC', borderTopWidth: 2.5, borderLeftWidth: 1.5, borderBottomWidth: 0.5, borderRightWidth: 0.5, borderTopColor: '#B6C7C7', borderLeftColor: '#B6C7C7', borderBottomColor: '#B6C7C7', borderRightColor: '#B6C7C7' },
+    searchBarActive: { borderBottomLeftRadius: 0, borderBottomRightRadius: 0, borderBottomWidth: 0 },
     searchInput: { flex: 1, marginLeft: 10, fontSize: 16, color: '#134E4A', paddingVertical: 0 },
-    filterContainer: { flexDirection: 'row', padding: 15, backgroundColor: '#F8FAFC', borderBottomWidth: 1, borderBottomColor: '#F1F5F9' },
-    filterGroup: { flex: 1, marginHorizontal: 5 },
-    filterLabel: { fontSize: 11, fontWeight: 'bold', color: '#64748B', marginBottom: 5, textTransform: 'uppercase' },
-    dateInput: { flexDirection: 'row', backgroundColor: '#fff', borderRadius: 8, padding: 10, borderWidth: 1, borderColor: '#E2E8F0', justifyContent: 'space-between', alignItems: 'center' },
-    dateText: { fontSize: 13, color: '#1E293B' },
-    listContent: { padding: 20, paddingBottom: 100,  gap:10},
+    
+    // Recessed Dropdown Drawer
+    filterCard: { backgroundColor: '#F1F5F9', borderBottomLeftRadius: 15, borderBottomRightRadius: 15, padding: 16, paddingTop: 12, borderLeftWidth: 1.5, borderRightWidth: 0.5, borderBottomWidth: 0.5, borderLeftColor: '#B6C7C7', borderRightColor: '#B6C7C7', borderBottomColor: '#B6C7C7', borderTopWidth: 2, borderTopColor: 'rgba(0,0,0,0.03)' },
+    
+    dateRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+    filterGroup: { flex: 1 },
+    dateDivider: { paddingHorizontal: 10, paddingTop: 15 },
+    filterLabel: { fontSize: 11, fontFamily: fonts.bold, color: '#94A3B8', marginBottom: 6, textTransform: 'uppercase', letterSpacing: 0.5 },
+    dateInput: { flexDirection: 'row', backgroundColor: '#FFFFFF', borderRadius: 12, paddingHorizontal: 12, height: 46, borderWidth: 1, borderColor: '#E2E8F0', justifyContent: 'space-between', alignItems: 'center' },
+    dateText: { fontSize: 14, color: '#334155', fontFamily: fonts.medium },
+    
+    summaryRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 16, gap: 12 },
+    summaryBox: { flex: 1, flexDirection: 'row', alignItems: 'center', padding: 12, borderRadius: 16, gap: 10 },
+    incomeBox: { backgroundColor: '#ECFDF5', borderWidth: 1, borderColor: '#D1FAE5' },
+    expenseBox: { backgroundColor: '#FFF1F2', borderWidth: 1, borderColor: '#FFE4E6' },
+    iconWrapper: { width: 28, height: 28, borderRadius: 14, justifyContent: 'center', alignItems: 'center' },
+    summaryLabel: { fontSize: 11, fontFamily: fonts.medium, color: '#64748B', marginBottom: 2 },
+    summaryValue: { fontSize: 15, fontFamily: fonts.bold },
+
+    listContent: { padding: 20, paddingBottom: 100, gap: 10 },
     emptyState: { alignItems: 'center', marginTop: 100 },
     emptyText: { color: '#94A3B8', fontSize: 14, marginTop: 10 }
 });

@@ -39,7 +39,7 @@ export default function Charts() {
                 <View style={styles.chartWrapper}>
                     <Text style={styles.chartTitle}>Financial Balance Trend</Text>
                     <Suspense fallback={<ActivityIndicator size="large" color="#9d4edd" style={styles.loader} />}>
-                        <BalancedFinancialGraph data={dashboardData.filtered} />
+                        <BalancedFinancialGraph data={dashboardData.graphData} />
                     </Suspense>
                 </View>
             </ScrollView>

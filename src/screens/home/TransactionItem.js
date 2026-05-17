@@ -31,7 +31,7 @@ const TransactionItem = ({ item }) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 12,
-        paddingHorizontal: 16, backgroundColor: '#fff', borderRadius: 20, marginBottom: 0, elevation: 1.5
+        paddingHorizontal: 12, backgroundColor: '#fff', borderRadius: 20, marginBottom: 0, elevation: 1.5
     },
     leftSection: { flexDirection: 'row', alignItems: 'center', flex: 1 },
     iconCircle: { width: 44, height: 44, borderRadius: 12, alignItems: 'center', justifyContent: 'center', marginRight: 14 },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     description: { fontSize: 15, fontFamily: fonts.bold, color: '#1E293B', marginBottom: 2 },
     date: { fontSize: 12, fontFamily: fonts.regular, color: '#94A3B8' },
     rightSection: { alignItems: 'flex-end' },
-    amount: { fontSize: 16, fontFamily: fonts.bold },
+    amount: { fontSize: 16, fontFamily: fonts.bold, marginRight: 10 },
 });
 
 export default TransactionItem;

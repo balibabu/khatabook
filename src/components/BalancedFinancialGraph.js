@@ -5,6 +5,7 @@ import { LineChart } from 'react-native-gifted-charts';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const BalancedFinancialGraph = ({ data }) => {
+    console.log(data);
     const chartData = useMemo(() => {
         let cumInc = 0, cumExp = 0;
         const income = [], expense = [], net = [];
@@ -60,15 +61,15 @@ const BalancedFinancialGraph = ({ data }) => {
                 curved
                 isAnimated
                 height={170}
-                spacing={75}            // Extra space so numbers don't touch
-                initialSpacing={30}
+                spacing={60}            // Extra space so numbers don't touch
+                initialSpacing={5}
                 width={SCREEN_WIDTH - 80}
                 adjustToWidth={false}
                 
                 // DATA POINT TEXT FIX
                 showValuesAsDataPointsText={true}
-                dataPointsHeight={0}    // Make dots invisible but existing
-                dataPointsWidth={0}     // Make dots invisible but existing
+                // dataPointsHeight={0}    // Make dots invisible but existing
+                // dataPointsWidth={0}     // Make dots invisible but existing
                 
                 // AXIS & GRID
                 maxValue={chartData.maxVal}
