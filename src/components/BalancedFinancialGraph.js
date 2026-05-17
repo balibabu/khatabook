@@ -5,7 +5,6 @@ import { LineChart } from 'react-native-gifted-charts';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const BalancedFinancialGraph = ({ data }) => {
-    console.log(data);
     const chartData = useMemo(() => {
         let cumInc = 0, cumExp = 0;
         const income = [], expense = [], net = [];

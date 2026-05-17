@@ -29,6 +29,7 @@ export const DataProvider = ({ children }) => {
             setLoading(false);
         }, (error) => {
             Alert.alert("Error fetching transactions:", error.message);
+            // console.log(error.message)
             setLoading(false);
         });
         return () => subscriber();
