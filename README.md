@@ -9,6 +9,7 @@
 <img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/6.png" width="250"/>
 <img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/7.png" width="250"/>
 <img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/8.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/9.png" width="250"/>
 </p>
 
 
