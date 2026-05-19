@@ -1,12 +1,14 @@
 ## Screenshots
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/Screenshot_20260108-091952_Trebuchet.png" width="250"/>
-<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/Screenshot_20260108-190423_Trebuchet.png" width="250"/>
-<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/Screenshot_20260107-075701_Trebuchet.png" width="250"/>
-<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/Screenshot_20260107-075716_Trebuchet.png" width="250"/>
-<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/Screenshot_20260107-075727_Trebuchet.png" width="250"/>
-<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/Screenshot_20260107-075737_Trebuchet.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/1.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/2.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/3.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/4.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/5.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/6.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/7.png" width="250"/>
+<img src="https://raw.githubusercontent.com/storeage/images/refs/heads/main/hisabkitab/current/8.png" width="250"/>
 </p>
 
 
